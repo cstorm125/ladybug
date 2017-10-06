@@ -1,0 +1,44 @@
+---
+title: "Exploration"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,message = FALSE,warning = FALSE)
+les_packages = lapply(c("ggthemes","plotly","tidyverse"), 
+                       require, character.only = TRUE)
+input_path = '../data/'
+```
+
+This is the exploration of the data used for the girl-ladyboy classifier. The ladyboy examples are scraped from [My Lady Boy Date](https://myladyboydate.com/) and the girl examples are from [Date in Asia](https://www.dateinasia.com/). The reason for using different sources is that in practice general-purpose dating sites have very limited number of ladyboy profiles.
+
+We limit the examples to individuals listed under the age of 40 and from the Southeast Asian countries of Indonesia, Malaysia, Philipines, Singapore, Thailand and Vietnam. The girl dataset is slightly more evenly distributed across age. 80% of examples of both datasets are from Philippines, and Thailand has a noticeably higher share of ladyboys.
+
+```{r,fig.width=10}
+ladyboy_df = readRDS(paste0(input_path,'ladyboy_df.rds')) %>% filter(age <= 40) %>%
+  select(username,country,age) %>% mutate(flag='ladyboy')
+girl_df = readRDS(paste0(input_path,'girl_df.rds')) %>%
+  select(username,country,age) %>% mutate(flag='girl')
+df = rbind(ladyboy_df,girl_df)
+
+age_agg = df %>% group_by(flag,age) %>% summarise(n=n())
+age_all = df %>% group_by(flag) %>% summarise(total=n())
+country_agg = country_agg %>% inner_join(country_all) %>% mutate(per = n/total)
+
+g = ggplot(age_agg, aes(x=age,y=n,fill=flag)) + geom_bar(stat='identity',position='dodge') +
+  theme_fivethirtyeight() + scale_fill_wsj() + ggtitle('Age Distribution')
+ggplotly(g)
+
+```
+
+```{r,fig.width=10}
+country_agg = df %>% group_by(flag,country) %>% summarise(n=n()) %>%
+  filter(country %in% c('indonesia','malaysia','philippines','singapore','thailand','vietnam'))
+country_all = df %>% group_by(flag) %>% summarise(total=n())
+country_agg = country_agg %>% inner_join(country_all) %>% mutate(per = n/total)
+
+g = ggplot(country_agg, aes(x=country,y=per,fill=flag)) + geom_bar(stat='identity',position='dodge') +
+  scale_y_continuous(labels=scales::percent) + coord_cartesian(ylim=c(0,0.2)) +
+  theme_fivethirtyeight() + scale_fill_wsj() + ggtitle('Country Distribution')
+ggplotly(g)
+```

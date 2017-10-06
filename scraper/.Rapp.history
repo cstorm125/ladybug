@@ -1,0 +1,3 @@
+load("/Users/charin.polpanumas/cpro/ladybug/scraper/search_df.rds")
+load("/Users/charin.polpanumas/cpro/ladybug/scraper/bigPic_m.rds")
+load("/Users/charin.polpanumas/cpro/ladybug/scraper/ladyboy_big.rds")
