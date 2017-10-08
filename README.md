@@ -16,9 +16,9 @@ Python package for girl-ladyboy detection using the model detailed in this proje
 
 ### Installation
 
-```
-pip install ledyba
-```
+* Download the `ledyba` folder
+* Download `weight/custom_model.zip` and unzip the file into `ledyba/ledyba`
+* At the `ledyba` directory level, type `pip install .`
 
 ### Example
 
