@@ -10,6 +10,29 @@ The ladyboy examples are scraped from [My Lady Boy Date](https://myladyboydate.c
 
 For more information see the [Medium article]().
 
+## ledyba
+
+Python package for girl-ladyboy detection using the model detailed in this project.
+
+### Installation
+
+```
+pip install ledyba
+```
+
+### Example
+
+```
+import ledyba
+
+#frontal face with dimension of (224,224,3)
+crpim = detect_face(image_file)
+ledyba.predict_gender(crpim)
+
+Output
+(0, 'girl', 0.92305273)
+```
+
 ## notebook
 
 ### capture_face.ipynb
@@ -18,7 +41,7 @@ Capture faces from scraped profile pictures using [OpenCV](http://opencv.org)
 
 ### modeling.ipynb
 
-Transfer learning using [VGG-Face](http://www.robots.ox.ac.uk/~vgg/publications/2015/Parkhi15/parkhi15.pdf)
+Transfer learning using [VGG-Face](http://www.robots.ox.ac.uk/~vgg/publications/2015/Parkhi15/parkhi15.pdf). The fully connected layers are replaced with two FC-BN-DO layers and a final sigmoid layer, which are trained for 10 epochs. It achieved the accuracy of 94.13%, F-score of 94% and AUC of 0.934.
 
 ## Rmd
 
