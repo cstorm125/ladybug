@@ -29,8 +29,8 @@ import ledyba
 crpim = detect_face(image_file)
 ledyba.predict_gender(crpim)
 
-Output
-(0, 'girl', 0.92305273)
+#Output
+#(0, 'girl', 0.92305273)
 ```
 
 ## notebook
