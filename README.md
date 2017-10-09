@@ -8,7 +8,7 @@ The ladyboy examples are scraped from [My Lady Boy Date](https://myladyboydate.c
 * Valid: 900 girls / 631 ladyboys
 * Test: 450 girls / 316 ladyboys
 
-For more information see the [Medium article]().
+For more information see the [Medium article](medium.com/@iwishcognitivedissonance/that-deep-learning-model-you-wish-you-had-when-visiting-thailand-ab8b095c03fa).
 
 ## ledyba
 
